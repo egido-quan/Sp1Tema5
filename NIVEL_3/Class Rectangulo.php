@@ -3,7 +3,7 @@
 class Rectangulo extends Shape {    
 
     public function area() {   
-        return $this->base * $this->altura;
+        return $this->parametros[0] * $this->parametros[1];
     }
 
 }

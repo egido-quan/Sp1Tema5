@@ -1,9 +1,10 @@
 <?php
 
 class Triangulo extends Shape {
+    
 
     public function area() {   
-        return ($this->base * $this->altura) / 2;
+        return ($this->parametros[0] * $this->parametros[1]) / 2;
     }
 
 }

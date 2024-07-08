@@ -1,36 +1,19 @@
 <?php
 
 abstract class Shape {
-    protected $base;
-    protected $altura;
-    protected $radio;
+    //Guardaré los atributos en un array, pues la cantidad depende del tipo de figura
+    protected $parametros = []; 
 
-    // Constructor preaprado para recibir diferentes númerso de variables
-    public function __construct(int ...$datos) { 
-        if (func_num_args() == 2) {
-            $this->base = func_get_arg(0);
-            $this->altura = func_get_arg(1);
-            $this->radio = 0;
-        } else if (func_num_args() == 1) {
-            $this->base = 0;
-            $this->altura = 0;
-            $this->radio = func_get_arg(0);
-        } else { // Esto no debería pasar, si pasa pongo todo a cero
-            $this->base = 1;
-            $this->altura = 1;
-            $this->radio = 1;
+    // Constructor escalable (en cantidad de atributos)
+    public function __construct(int ...$datos) {
+        for ($i = 0; $i < func_num_args(); $i++) {
+            $this->parametros[$i] = func_get_arg($i);
         }
     }
 
-    function getBase() {
-        return $this->base;
-    }
-    function getAltura() {
-        return $this->altura;
-    }
-
-    function getRadio() {
-        return $this->radio;
+    //Getter para cada elemento del array
+    public function getParametro_i($i) {
+        return $this->parametros[$i];
     }
 
     public abstract function area();
