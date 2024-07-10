@@ -1,18 +1,20 @@
 <?php
 
-require "Class Shape.php";
-require "Class Triangulo.php";
-require "Class Rectangulo.php";
-require "Class Circulo.php";
-require "Class Trapecio.php";
+require "Forma.php";
+require "Forma2Par.php";
+require "Triangulo.php";
+require "Rectangulo.php";
+require "Circulo.php";
+
 
 
 const NUM_SHAPES = 10;
 $shapes = array();
 
+
 //Creo varias figuras de diferentes tipos aletoriamente
 for ($i = 0; $i < NUM_SHAPES; $i++) { 
-    switch (rand(0,3)) {
+    switch (rand(0,2)) {
         case 0: //Es rectángulo
             $lado1 = rand(1,20); //genero las medidas aleatoriamente
             $lado2 = rand(1,20);
@@ -25,15 +27,9 @@ for ($i = 0; $i < NUM_SHAPES; $i++) {
             break;
         case 2: //Es círculo
             $radio = rand(1, 20); //genero el radio aleatoriamente
-            $shapes[] = new Circulo($radio); //Solo un parámetro, el radio
+            $shapes[] = new Circulo($radio);
             break;
-        case 3: //Es trapecio
-            $baseLarga = rand(1,20);
-            $baseCorta = rand(1,20);
-            $altura = rand(1,20);
-            $shapes[] = new Trapecio($baseLarga, $baseCorta, $altura);
-            break;
-    }
+ }
 }
 
 //Muestro los parámetors y las áreas de cada figura
@@ -41,37 +37,28 @@ for ($i = 0; $i < NUM_SHAPES; $i++) {
 for ($i = 0; $i < NUM_SHAPES; $i++) {
     switch (get_class($shapes[$i])) {
         case "Rectangulo":
-            echo "Figura " . ($i+1) . ": " . get_class($shapes[$i]) . "<br> Lado 1 = " . $shapes[$i]->getParametro_i(0) . ",  Lado 2 = " . $shapes[$i]->getParametro_i(1) . ", area = ";
+            echo "Figura " . ($i+1) . ": " . get_class($shapes[$i]) . "<br> Lado 1 = " . $shapes[$i]->getParam1() . ",  Lado 2 = " . $shapes[$i]->getParam2() . ", area = ";
             mostrarArea($shapes[$i]);
             echo "<br><br>";
             break;
         case "Triangulo":
-            echo "Figura " . ($i+1) . ": " . get_class($shapes[$i]) . "<br> Base = " . $shapes[$i]->getParametro_i(0) . ",  altura = " . $shapes[$i]->getParametro_i(1) . ", area = ";
+            echo "Figura " . ($i+1) . ": " . get_class($shapes[$i]) . "<br> Base = " . $shapes[$i]->getParam1() . ",  altura = " . $shapes[$i]->getParam2() . ", area = ";
             mostrarArea($shapes[$i]);
             echo "<br><br>";
             break;
         case "Circulo":
-            echo "Figura " . ($i+1) . ": " . get_class($shapes[$i]) . "<br> Radio = " . $shapes[$i]->getParametro_i(0) .  ", area = ";
+            echo "Figura " . ($i+1) . ": " . get_class($shapes[$i]) . "<br> Radio = " . $shapes[$i]->getRadio() .  ", area = ";
             mostrarArea($shapes[$i]);
             echo "<br><br>";
             break;
-        case "Trapecio":
-            echo "Figura " . ($i+1) . ": " . get_class($shapes[$i]) . "<br> Base larga = " . $shapes[$i]->getParametro_i(0) . ", Base corta = "
-            . $shapes[$i]->getParametro_i(1) .",  altura = " . $shapes[$i]->getParametro_i(2) . ", area = ";
-            mostrarArea($shapes[$i]);
-            echo "<br><br>";
-            break;
+
     }
-        
-
-
 
 }
 
 
-
-function mostrarArea(Shape $shape) {
-    echo $shape->area();
+function mostrarArea(Forma $forma) {
+    echo $forma->area();
 }
 
 
